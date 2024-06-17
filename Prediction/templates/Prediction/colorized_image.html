@@ -1,0 +1,33 @@
+ {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Colorized Image</title>
+    <style>
+      body{
+        background-color: aliceblue;
+        margin-top: 17%;
+        text-align: center;
+      }
+      input[type="submit"] {
+        background-color: cornflowerblue;
+    }
+    </style>
+</head>
+<body>
+   {% if colorized_image_base64 == None %} 
+    <form action="/api/predict/", enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+
+        <input type="file" id="image" name="image">
+
+        <input type="submit"  value='Colorize'>
+      </form>
+    
+    
+ {% else %} 
+
+    <img src="data:image/jpeg;base64,{{ colorized_image_base64 }}"/>
+  {% endif %} 
+</body>
+</html>
